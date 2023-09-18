@@ -21,11 +21,11 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Build
-      run: dotnet build ./NativeShell.csproj
+      run: dotnet build ./NativeShell/NativeShell.csproj
     # - name: Test
     #  run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack ./NativeShell.csproj --no-restore
+      run: dotnet pack ./NativeShell/NativeShell.csproj --no-restore
 
     - name: Publish Eternity
       run: dotnet nuget push **/*.nupkg -k ${NUGET_TOKEN} -s https://api.nuget.org/v3/index.json --no-symbols
