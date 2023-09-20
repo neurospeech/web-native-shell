@@ -25,14 +25,14 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-	    <ProjectReference Include="..\yantra\YantraJS.ExpressionCompiler\YantraJS.ExpressionCompiler.csproj" />
-		<ProjectReference Include="..\yantra\YantraJS.JSClassGenerator\YantraJS.JSClassGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 		<Compile Include="..\yantra\YantraJS.Core\**\*.cs">
 			<Link>Platforms\Android\Engine\%(RecursiveDir)%(FileName)%(Extension)</Link>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="YantraJS.ExpressionCompiler" Version="1.2.188" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+		<PackageReference Include="YantraJS.JSClassGenerator" Version="1.2.188" />
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.216">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
