@@ -81,5 +81,11 @@ namespace NativeShell.Platforms.iOS.Controls
                 }
             }
         }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            ScrollView.Frame = Bounds;
+        }
     }
 }
