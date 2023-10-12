@@ -82,7 +82,7 @@ namespace NativeShell.Platforms.iOS.Controls
             }
             
             ScrollView.Bounces = false;
-            ScrollView.ScrollEnabled = false;
+            // ScrollView.ScrollEnabled = false;
         }
 
         public override void LayoutSubviews()

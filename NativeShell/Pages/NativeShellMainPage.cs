@@ -16,27 +16,12 @@ namespace NativeShell.Pages
 
         public NativeShellMainPage()
         {
-            WebView = new NativeWebView();
-
-            var grid = new Grid()
-            {
+            WebView = new NativeWebView() {
                 HorizontalOptions = LayoutOptions.Fill,
-                VerticalOptions = LayoutOptions.Fill,
-                RowDefinitions =
-                {
-                    new RowDefinition
-                    {
-                        Height = GridLength.Star
-                    }
-                },
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition
-                    {
-                        Width = GridLength.Star
-                    }
-                }
+                VerticalOptions = LayoutOptions.Fill
             };
+
+            var grid = new Grid();
             grid.Children.Add(WebView);
             this.Content = grid;
             // this.Content = WebView;
