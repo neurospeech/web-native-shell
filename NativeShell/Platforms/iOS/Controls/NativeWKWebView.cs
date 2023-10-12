@@ -77,13 +77,11 @@ namespace NativeShell.Platforms.iOS.Controls
                         a("queued");
                     }), WKContentWorld.Page, "mainScript");
 
-                    // nativeWebView.Eval(Scripts.NativeShell);
                 }
             }
             
             ScrollView.Bounces = false;
             AutosizesSubviews = true;
-            // ScrollView.ScrollEnabled = false;
         }
 
         public override void LayoutSubviews()
