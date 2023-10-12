@@ -82,6 +82,7 @@ namespace NativeShell.Platforms.iOS.Controls
             }
             
             ScrollView.Bounces = false;
+            AutosizesSubviews = true;
             // ScrollView.ScrollEnabled = false;
         }
 
