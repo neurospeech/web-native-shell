@@ -80,6 +80,7 @@ namespace NativeShell.Platforms.iOS.Controls
                     // nativeWebView.Eval(Scripts.NativeShell);
                 }
             }
+            
             ScrollView.Bounces = false;
             ScrollView.ScrollEnabled = false;
         }
