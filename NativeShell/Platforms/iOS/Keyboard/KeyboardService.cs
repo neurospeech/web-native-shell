@@ -18,7 +18,8 @@ namespace NativeShell.Platforms.iOS.Keyboard
             NativeWebView webView,
             System.Drawing.RectangleF rect) {
             var height = rect.Height;
-            iOSWebView.LayoutMargins = new UIEdgeInsets(0,0, height, 0);
+            // iOSWebView.LayoutMargins = new UIEdgeInsets(0,0, height, 0);
+            iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, -height, 0);
             return height;
         }
         public static IDisposable Install(WKWebView iOSWebView, NativeWebView webView)
