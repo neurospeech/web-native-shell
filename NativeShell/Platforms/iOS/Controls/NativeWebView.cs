@@ -25,7 +25,7 @@ namespace NativeShell.Controls
 
         partial void OnPlatformInit()
         {
-            this.disposables.Register(KeyboardService.Install(this));
+            // this.disposables.Register(KeyboardService.Install(this));
         }
 
         

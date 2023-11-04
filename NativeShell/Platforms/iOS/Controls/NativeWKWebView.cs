@@ -4,6 +4,7 @@ using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 using NativeShell.Controls;
 using NativeShell.Platforms.iOS.Controls.WebView;
+using NativeShell.Platforms.iOS.Keyboard;
 using NativeShell.Resources;
 using ObjCRuntime;
 using System;
@@ -83,6 +84,8 @@ namespace NativeShell.Platforms.iOS.Controls
             ScrollView.Bounces = false;
             AutosizesSubviews = true;
             ClipsToBounds = true;
+
+            KeyboardService.Install(this, handler.VirtualView as NativeWebView);
         }
 
         public override void LayoutSubviews()
@@ -90,5 +93,6 @@ namespace NativeShell.Platforms.iOS.Controls
             base.LayoutSubviews();
             ScrollView.Frame = Bounds;
         }
+
     }
 }
