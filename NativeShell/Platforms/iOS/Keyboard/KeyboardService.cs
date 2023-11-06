@@ -18,8 +18,39 @@ namespace NativeShell.Platforms.iOS.Keyboard
             NativeWebView webView,
             System.Drawing.RectangleF rect) {
             var height = rect.Height;
-            // iOSWebView.LayoutMargins = new UIEdgeInsets(0,0, height, 0);
-            iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, -height, 0);
+
+
+
+            // var inset = new UIEdgeInsets(0,0, height, 0);
+            // iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, iOSWebView.ScrollView.VisibleSize.Height - height, 0);
+            // iOSWebView.ScrollView.ContentMode = UIViewContentMode.ScaleToFill;
+            // iOSWebView.ScrollView.ContentOffset = new CoreGraphics.CGPoint()
+            // iOSWebView.Bounds = new CoreGraphics.CGRect(0,0,  iOSWebView.InvalidateIntrinsicContentSize())
+            // iOSWebView.InvalidateIntrinsicContentSize();
+            // iOSWebView.LayoutIfNeeded();
+            // iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, height, 0);
+
+            // iOSWebView.SizeToFit();
+            // iOSWebView.SetNeedsLayout();
+
+            // iOSWebView.SetViewportInsets(inset, UIEdgeInsets.Zero);
+
+            // iOSWebView.ScrollView.Bounds = new CoreGraphics.CGRect(0, 0, iOSWebView.Bounds.Width, iOSWebView.Bounds.Height - height);
+            // iOSWebView.ScrollView.LayoutIfNeeded();
+
+            var parent = iOSWebView.Superview;
+            var parentBounds = parent.Bounds;
+
+            // iOSWebView.LayoutMargins = new UIEdgeInsets(0, 0, -height, 0);
+            // iOSWebView.LayoutIfNeeded();
+            // iOSWebView.SizeToFit();
+
+            iOSWebView.Bounds = new CoreGraphics.CGRect(parentBounds.Left, parentBounds.Top, parentBounds.Width, parentBounds.Height - height);
+            iOSWebView.SizeToFit();
+            // iOSWebView.RemoveConstraints(iOSWebView.Constraints);
+            // iOSWebView.AddConstraint(NSLayoutConstraint.Create( );
+            
+            
             return height;
         }
         public static IDisposable Install(WKWebView iOSWebView, NativeWebView webView)
