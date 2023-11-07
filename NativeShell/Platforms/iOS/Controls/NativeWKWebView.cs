@@ -97,7 +97,7 @@ internal class NativeWKWebView : MauiWKWebView
         this.AllowsBackForwardNavigationGestures = false;
         this.ScrollView.ContentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.Never;
         // this.RemoveConstraints(this.Constraints);
-        // KeyboardService.Install(this, handler.VirtualView as NativeWebView);
+        KeyboardService.Install(this, handler.VirtualView as NativeWebView);
     }
 
     public override void LayoutSubviews()

@@ -19,38 +19,36 @@ namespace NativeShell.Platforms.iOS.Keyboard
             System.Drawing.RectangleF rect) {
             var height = rect.Height;
 
+            try
+            {
+                var eventName = "keyboardHidden";
+                var keyboard = "hidden";
+                var styleHeight = "''";
+                var stylePosition = "''";
+                if (height > 0)
+                {
+                    keyboard = "visible";
+                    eventName = "keyboardVisible";
+                    styleHeight = "window.visualViewport.height + 'px'";
+                    stylePosition = "'absolute'";
+                }
+                webView.Eval(@$"
+setTimeout(() => {{
+    document.body.dataset.keyboard = '{keyboard}';
+    document.body.dataset.keyboardHeight = {height};
+    document.body.dispatchEvent(new CustomEvent('{eventName}', {{ bubbles: true, detail: {{ height: {height} }} }}));
+    document.body.style.height = {styleHeight};
+    document.body.style.position = {stylePosition};
+    if ({height}) {{
+        window.scrollTo(0,0);
+    }}
+}}, 1);
+");
+            }
+            catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
 
-
-            // var inset = new UIEdgeInsets(0,0, height, 0);
-            // iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, iOSWebView.ScrollView.VisibleSize.Height - height, 0);
-            // iOSWebView.ScrollView.ContentMode = UIViewContentMode.ScaleToFill;
-            // iOSWebView.ScrollView.ContentOffset = new CoreGraphics.CGPoint()
-            // iOSWebView.Bounds = new CoreGraphics.CGRect(0,0,  iOSWebView.InvalidateIntrinsicContentSize())
-            // iOSWebView.InvalidateIntrinsicContentSize();
-            // iOSWebView.LayoutIfNeeded();
-            // iOSWebView.ScrollView.ContentInset = new UIEdgeInsets(0, 0, height, 0);
-
-            // iOSWebView.SizeToFit();
-            // iOSWebView.SetNeedsLayout();
-
-            // iOSWebView.SetViewportInsets(inset, UIEdgeInsets.Zero);
-
-            // iOSWebView.ScrollView.Bounds = new CoreGraphics.CGRect(0, 0, iOSWebView.Bounds.Width, iOSWebView.Bounds.Height - height);
-            // iOSWebView.ScrollView.LayoutIfNeeded();
-
-            var parent = iOSWebView.Superview;
-            var parentBounds = parent.Bounds;
-
-            // iOSWebView.LayoutMargins = new UIEdgeInsets(0, 0, -height, 0);
-            // iOSWebView.LayoutIfNeeded();
-            // iOSWebView.SizeToFit();
-
-            iOSWebView.Bounds = new CoreGraphics.CGRect(parentBounds.Left, parentBounds.Top, parentBounds.Width, parentBounds.Height - height);
-            iOSWebView.SizeToFit();
-            // iOSWebView.RemoveConstraints(iOSWebView.Constraints);
-            // iOSWebView.AddConstraint(NSLayoutConstraint.Create( );
-            
-            
             return height;
         }
         public static IDisposable Install(WKWebView iOSWebView, NativeWebView webView)
@@ -64,12 +62,7 @@ namespace NativeShell.Platforms.iOS.Keyboard
                     return;
                 }
                 NSValue result = (NSValue)n.UserInfo.ObjectForKey(new NSString(UIKeyboard.FrameEndUserInfoKey));
-                var height = UpdateHeightMargin(iOSWebView, webView, result.RectangleFValue);
-                try
-                {
-                    webView.Eval($"document.body.dataset.keyboard = 'shown'; document.body.dataset.keyboardHeight = {height};");
-                }
-                catch { }
+                UpdateHeightMargin(iOSWebView, webView, result.RectangleFValue);
             });
             var didChange = defaultCenter.AddObserver(UIKeyboard.DidChangeFrameNotification, (n) => {
                 if (n.UserInfo == null)
@@ -77,21 +70,10 @@ namespace NativeShell.Platforms.iOS.Keyboard
                     return;
                 }
                 NSValue result = (NSValue)n.UserInfo.ObjectForKey(new NSString(UIKeyboard.FrameEndUserInfoKey));
-                var height = UpdateHeightMargin(iOSWebView, webView, result.RectangleFValue);
-                try
-                {
-                    webView.Eval(
-                        $"document.body.dataset.keyboard = 'shown'; document.body.dataset.keyboardHeight = {height};");
-                }
-                catch { }
+                UpdateHeightMargin(iOSWebView, webView, result.RectangleFValue);
             });
             var didHide = defaultCenter.AddObserver(UIKeyboard.DidHideNotification, (n) => {
-                var height = UpdateHeightMargin(iOSWebView, webView, new System.Drawing.RectangleF(0,0,0,0));
-                try
-                {
-                    webView.Eval("document.body.dataset.keyboard = 'hidden'; document.body.dataset.keyboardHeight = 0;");
-                }
-                catch { }
+                UpdateHeightMargin(iOSWebView, webView, new System.Drawing.RectangleF(0,0,0,0));
             });
 
             return new DisposableAction(delegate {
