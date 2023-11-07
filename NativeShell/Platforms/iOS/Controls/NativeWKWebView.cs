@@ -54,7 +54,10 @@ internal class NativeWKWebView : MauiWKWebView
     {
         configuration.AllowsInlineMediaPlayback = true;
         configuration.Preferences.JavaScriptCanOpenWindowsAutomatically = true;
-        configuration.Preferences.JavaScriptEnabled = true;
+        // configuration.Preferences.JavaScriptEnabled = true;
+        // configuration.Preferences.JavaScriptEnabled = true;
+        configuration.DefaultWebpagePreferences ??= new WKWebpagePreferences();
+        configuration.DefaultWebpagePreferences.AllowsContentJavaScript = true;
         configuration.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
         configuration.UserContentController = new NativeWebViewUserContentController();
         return configuration;
@@ -97,7 +100,7 @@ internal class NativeWKWebView : MauiWKWebView
         this.AllowsBackForwardNavigationGestures = false;
         this.ScrollView.ContentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.Never;
         // this.RemoveConstraints(this.Constraints);
-        KeyboardService.Install(this, handler.VirtualView as NativeWebView);
+        KeyboardService.Install(this, (handler.VirtualView as NativeWebView)!);
     }
 
     public override void LayoutSubviews()
