@@ -68,7 +68,13 @@ internal class NativeWKWebView : MauiWKWebView
         WebViewHandler handler,
         WKWebViewConfiguration configuration) : base(frame, handler, Init(configuration))
     {
-        // var viewPortScript = "document.head.querySelector('meta[name=\"viewport\"]').content += ',height=device-height';";
+        var viewPortScript = @"
+            window.visualViewport.addEventListener(""scroll"", (e) => e.preventDefault());
+            window.visualViewport.addEventListener(""resize"", () => {
+                document.body.style.height = window.visualViewport.height + ""px"";
+                document.body.style.width = window.visualViewport.width + ""px"";
+            });
+        ";
         this.Inspectable = true;
         if (handler.VirtualView is NativeWebView nativeWebView)
         {
@@ -84,7 +90,7 @@ internal class NativeWKWebView : MauiWKWebView
                     a("queued");
                 }), WKContentWorld.Page, "mainScript");
 
-                // nwc.AddUserScript(new WKUserScript((NSString)viewPortScript, WKUserScriptInjectionTime.AtDocumentEnd, true));
+                nwc.AddUserScript(new WKUserScript((NSString)viewPortScript, WKUserScriptInjectionTime.AtDocumentEnd, true));
 
             }
         }
@@ -100,7 +106,7 @@ internal class NativeWKWebView : MauiWKWebView
         this.AllowsBackForwardNavigationGestures = false;
         this.ScrollView.ContentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.Never;
         // this.RemoveConstraints(this.Constraints);
-        KeyboardService.Install(this, (handler.VirtualView as NativeWebView)!);
+        // KeyboardService.Install(this, (handler.VirtualView as NativeWebView)!);
     }
 
     public override void LayoutSubviews()
