@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-android;net7.0-maccatalyst;net7.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-ios;net8.0-android;net8.0-maccatalyst;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageId>NeuroSpeech.NativeShell</PackageId>
 		<Version>1.0.1</Version>
 		<Nullable>enable</Nullable>
-		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -24,6 +23,9 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
 		<Compile Include="..\yantra\YantraJS.Core\**\*.cs">
 			<Link>Platforms\Android\Engine\%(RecursiveDir)%(FileName)%(Extension)</Link>
@@ -31,12 +33,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="YantraJS.ExpressionCompiler" Version="1.2.188" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
-		<PackageReference Include="YantraJS.JSClassGenerator" Version="1.2.188" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.216">
+		<PackageReference Include="YantraJS.ExpressionCompiler" Version="1.2.206" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+		<PackageReference Include="YantraJS.JSClassGenerator" Version="1.2.206" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

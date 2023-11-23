@@ -69,7 +69,10 @@ internal class NativeWKWebView : MauiWKWebView
         WKWebViewConfiguration configuration) : base(frame, handler, Init(configuration))
     {
         var viewPortScript = @"
-            window.visualViewport.addEventListener(""scroll"", (e) => e.preventDefault());
+            window.visualViewport.addEventListener(""scroll"", (e) => {{
+                debugger;
+                e.preventDefault();
+            }});
             window.visualViewport.addEventListener(""resize"", () => {
                 document.body.style.height = window.visualViewport.height + ""px"";
                 document.body.style.width = window.visualViewport.width + ""px"";

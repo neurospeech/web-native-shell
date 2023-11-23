@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "C#: NativeShellApp [NativeShellApp - net8.0-ios]",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/NativeShellApp/NativeShellApp.csproj",
+            "launchConfigurationId": "TargetFramework=net8.0-ios;NativeShell"
+        }
+    ]
+}
