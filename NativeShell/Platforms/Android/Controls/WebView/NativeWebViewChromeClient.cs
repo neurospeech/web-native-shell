@@ -122,11 +122,11 @@ namespace NativeShell.Controls
             var grid = webView.Parent as Grid;
             if (grid != null)
             {
-                var v = view.ToView();
-                v.HorizontalOptions = LayoutOptions.Fill;
-                v.VerticalOptions = LayoutOptions.Fill;
-                grid.Children.Add(v);
-                var d = BackButtonInterceptor.Instance.InterceptBackButton(() => OnHideCustomView());
+                // var v = view.;
+                // v.HorizontalOptions = LayoutOptions.Fill;
+                // v.VerticalOptions = LayoutOptions.Fill;
+                // grid.Children.Add(v);
+                // var d = BackButtonInterceptor.Instance.InterceptBackButton(() => OnHideCustomView());
 
                 //var closeButton = new CloseButton { 
                 //    Margin = new Xamarin.Forms.Thickness(0,10,10,0),
@@ -141,12 +141,12 @@ namespace NativeShell.Controls
 
                 hideCustomView = () => {
                     // HybridRunner.RunAsync(() => webView.EvaluateJavaScriptAsync("__androidHideCustomView()"));
-                    this.fullScreenView = null;
-                    // grid.Children.Remove(closeButton);
-                    grid.Children.Remove(v);
-                    callback?.OnCustomViewHidden();
-                    hideCustomView = null;
-                    d.Dispose();
+                    // this.fullScreenView = null;
+                    // // grid.Children.Remove(closeButton);
+                    // grid.Children.Remove(v);
+                    // callback?.OnCustomViewHidden();
+                    // hideCustomView = null;
+                    // d.Dispose();
                 };
             }
 

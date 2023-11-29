@@ -70,10 +70,11 @@ internal class NativeWKWebView : MauiWKWebView
     {
         var viewPortScript = @"
             window.visualViewport.addEventListener(""scroll"", (e) => {{
-                debugger;
-                e.preventDefault();
+                const vp = window.visualViewport;
+                window.scrollBy(-vp.offsetLeft, -vp.offsetTop);
             }});
             window.visualViewport.addEventListener(""resize"", () => {
+                document.body.style.position = ""absolute"";
                 document.body.style.height = window.visualViewport.height + ""px"";
                 document.body.style.width = window.visualViewport.width + ""px"";
             });
