@@ -9,7 +9,7 @@ using UserNotifications;
 
 namespace NativeShell.Platforms
 {
-    public abstract class WebNativeAppDelegate : MauiUIApplicationDelegate, IUNUserNotificationCenterDelegate
+    public abstract class NativeShellAppDelegate : MauiUIApplicationDelegate, IUNUserNotificationCenterDelegate
     {
         public event EventHandler<UserInfoEventArgs>? NotificationReceived;
 
