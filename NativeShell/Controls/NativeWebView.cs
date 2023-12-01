@@ -42,7 +42,29 @@ namespace NativeShell.Controls
             // setup channel...
             OnPlatformInit();
 
-            
+            NativeShell.Instance.OnUrlRequested += Instance_OnUrlRequested;
+            NativeShell.Instance.OnDeviceTokenUpdated+= Instance_OnDeviceTokenUpdated;
+
+        }
+
+
+        private void Instance_OnUrlRequested(object? sender, EventArgs e)
+        {
+            try
+            {
+                this.Eval("document.body.dispatchEvent(new CustomEven('urlRequested', { details: {}, bubbles: true });");
+            }
+            catch
+            { }
+        }
+
+        private void Instance_OnDeviceTokenUpdated(object? sender, EventArgs e)
+        {
+            try
+            {
+                this.Eval("document.body.dispatchEvent(new CustomEven('deviceTokenUpdated', { details: {}, bubbles: true });");
+            } catch
+            {}
         }
 
         /// <summary>

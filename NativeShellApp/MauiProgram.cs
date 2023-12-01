@@ -1,10 +1,16 @@
-﻿namespace SocialMailApp;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Maui.LifecycleEvents;
+using NativeShell;
 
-public static class MauiProgram
+namespace SocialMailApp;
+
+public static partial class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
+		    builder.UseMauiCommunityToolkit()
+            .RegiserPushServices();
 		builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>

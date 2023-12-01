@@ -35,6 +35,7 @@
 	<ItemGroup>
 		<PackageReference Include="YantraJS.ExpressionCompiler" Version="1.2.206" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 		<PackageReference Include="YantraJS.JSClassGenerator" Version="1.2.206" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.0" />
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -42,7 +43,16 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+		<PackageReference Include="Plugin.Firebase" Version="2.0.3" />
+		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7" Version="1.9.0.1" ExcludeAssets="build;buildTransitive" />
+		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.0.1" ExcludeAssets="build;buildTransitive" />
+	</ItemGroup>
+
 	<ItemGroup>
+	  <Compile Update="Platforms\iOS\MauiAppBuilderExtensions.iOS.cs">
+	    <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+	  </Compile>
 	  <Compile Update="Resources\Scripts.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
