@@ -48,12 +48,13 @@
             return new Promise((resolve, reject) => {
                 let rid = id++;
                 map.set(rid, { resolve, reject });
+                const inScript = script.toString();
                 let sendScript = scriptTemplate;
                 sendScript = sendScript
                     .replace(/\$rid\$/g, rid)
                     .replace("$args$", JSON.stringify(args));
                 sendScript = sendScript
-                    .replace("$code$", script);
+                    .replace("$code$", inScript);
                 if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.mainScript) {
                     window.webkit.messageHandlers.mainScript.postMessage(`(${sendScript})();`);
                 }
