@@ -5,7 +5,7 @@
     function runCode($rid$, $code$, $args$) {
         return function () {
             try {
-                let result = ($code$).apply({ clr, evalInPage }, ...$args$);
+                let result = ($code$).apply({ clr, evalInPage }, $args$);
                 if (result && result.then) {
                     result.then((r) => {
                         evalInPage(`window.nativeShell.on($rid$, ${JSON.stringify(r) || 1})`);
