@@ -8,8 +8,12 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new NativeShellMainPage() {
-			
+		var mp = new NativeShellMainPage() {
+			Url = "https://m.800casting.com/ProfileEditor/Agency"
 		};
+		mp.WebView.UserAgent = "800Casting-Hybrid-Mobile-App/1.0";
+
+
+        MainPage = mp;
 	}
 }
