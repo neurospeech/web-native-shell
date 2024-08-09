@@ -1,5 +1,6 @@
 ﻿(function () {
     let id = 1;
+
     const map = new Map();
 
     function runCode($rid$, $code$, $args$) {
