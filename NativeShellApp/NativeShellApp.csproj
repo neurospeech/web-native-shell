@@ -34,10 +34,17 @@
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<MtouchInterpreter>all</MtouchInterpreter>
-		<CodesignKey>iPhone Distribution: NeuroSpeech Technologies Private Limited (XGZ87AZF38)</CodesignKey>
-		<CodesignProvision>Social Mail Provisioning Profile</CodesignProvision>
 		<ArchiveOnBuild>true</ArchiveOnBuild>
 	</PropertyGroup>
+
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+		<MtouchLink>None</MtouchLink>
+		<EnableSGenConc>true</EnableSGenConc>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<Registrar>static</Registrar>
+	</PropertyGroup>
+
 
 	<!-- For Android Push Notifications -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
