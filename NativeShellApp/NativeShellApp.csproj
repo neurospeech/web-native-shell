@@ -53,6 +53,7 @@
 		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.3.0.1" />
 		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7" Version="2.0.0.1" ExcludeAssets="build;buildTransitive" />
 		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.0.1" ExcludeAssets="build;buildTransitive" />
+		<GoogleServicesJson Include="config\google-services.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,8 +75,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\NativeShell\NativeShell.csproj" />
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.71" />
+		<ProjectReference Include="..\NativeShell\NativeShell.csproj" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+
 	</ItemGroup>
 
 </Project>

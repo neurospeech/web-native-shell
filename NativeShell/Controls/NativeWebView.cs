@@ -31,8 +31,22 @@ namespace NativeShell.Controls
             this.Clr = new GlobalClr();
             Context["clr"] = Context.Marshal(Clr);
 
+            Context["serialize"] = Context.CreateFunction(1, (c, s) => {
+                try
+                {
+                    var arg0 = s[0];
+                    var serialized = Clr.Serialize(arg0);
+                    return Context.CreateString(serialized);
+                } catch (Exception error)
+                {
+                    System.Diagnostics.Debug.WriteLine(error.ToString());
+                    return Context.CreateString("null");
+                }
+            }, "serialize");
+
             Context["evalInPage"] = Context.CreateFunction(1, (c, s) => {
-                this.Eval(s.ToString());
+                var script = s[0].ToString();
+                this.Eval(script);
                 return Context.Undefined;
             }, "sendToBrowser");
 

@@ -460,10 +460,17 @@ var _$_classes = {};
         {
             if (valueToCopy == null)
             {
-                return null;
+                return context.Null;
             }
             if (valueToCopy is IJSValue jv) return jv;
-            var type = valueToCopy.GetType();
+
+            if (valueToCopy is Type type)
+            {
+                return context.CreateClass(type);
+            }
+
+            type = valueToCopy.GetType();
+
             type = Nullable.GetUnderlyingType(type) ?? type;
             if (type.IsEnum)
             {

@@ -21,6 +21,50 @@ namespace NativeShell.Core
             return Type.GetType(typeName);
         }
 
+        public string Serialize(IJSValue value)
+        {
+            if (value.IsValueNull || value.IsUndefined)
+            {
+                return NullJson;
+            }
+            if (value.IsString)
+            {
+                return Serialize(value.ToString()!);
+            }
+            if (value.IsNumber)
+            {
+                return Serialize(value.DoubleValue!);
+            }
+            if (value.IsDate)
+            {
+                return Serialize(value.DateValue!);
+            }
+            if (value.IsBoolean)
+            {
+                return Serialize(value.BooleanValue!);
+            }
+            if (value.IsArray)
+            {
+                return Serialize(value.ToArray().Select((x) => SerializeAsync(x)).ToList());
+            }
+            if (value.IsObject)
+            {
+                var list = new List<string>();
+                foreach (var item in value.Entries)
+                {
+                    list.Add($"\"{item.Key}\": {SerializeAsync(item.Value)}");
+                }
+                return "{" + string.Join(",", list) + "}";
+            }
+            if (value.IsWrapped)
+            {
+                var v = value.Unwrap<object>();
+                throw new NotSupportedException($"You cannot transfer clr object to JavaScript");
+
+            }
+            return Serialize(value.ToString());
+        }
+
         public async Task<string> SerializeAsync(IJSValue value)
         {
             if (value.IsValueNull || value.IsUndefined)

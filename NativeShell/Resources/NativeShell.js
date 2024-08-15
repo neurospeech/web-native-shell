@@ -10,18 +10,18 @@
                 let result = ($code$).apply({ clr, evalInPage }, a);
                 if (result && result.then) {
                     result.then((r) => {
-                        evalInPage(`window.nativeShell.on($rid$, ${JSON.stringify(r) || 1})`);
+                        evalInPage(`window.nativeShell.on($rid$, ${serialize(r) || 1})`);
                     }, (e) => {
-                        evalInPage(`window.nativeShell.on($rid$, void 0, ${JSON.stringify(e.stack || e)})`);
+                        evalInPage(`window.nativeShell.on($rid$, void 0, ${serialize(e.stack || e)})`);
                     });
                 } else {
                     setTimeout(() =>
-                        evalInPage(`window.nativeShell.on($rid$, ${JSON.stringify(r) || 1})`),
+                        evalInPage(`window.nativeShell.on($rid$, ${serialize(result) || 1})`),
                         1);
                 }
             } catch (error) {
                 setTimeout(() =>
-                    evalInPage(`window.nativeShell.on($rid$, void 0, ${JSON.stringify(error.stack || error)})`),
+                    evalInPage(`window.nativeShell.on($rid$, void 0, ${serialize(error.stack || error)})`),
                     1);
             }
         }
