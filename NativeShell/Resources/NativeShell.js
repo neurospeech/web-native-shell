@@ -34,13 +34,13 @@
         on(rid, result, error) {
             try {
                 const { resolve, reject } = map.get(rid);
-                if (result) {
-                    resolve(result);
-                    return;
-                }
                 if (error) {
                     reject(error);
+                    return;
                 }
+                resolve(result.value);
+            } catch (error) {
+                console.error(error);
             } finally {
                 map.delete(rid);
             }

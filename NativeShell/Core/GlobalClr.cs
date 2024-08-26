@@ -9,8 +9,6 @@ namespace NativeShell.Core
 
         private ConditionalWeakTable<object, string> references = new ConditionalWeakTable<object, string>();
 
-        private string NullJson = System.Text.Json.JsonSerializer.Serialize(new { value = (int?)null });
-
         public GlobalClr()
         {
         }
@@ -25,7 +23,7 @@ namespace NativeShell.Core
         {
             if (value.IsValueNull || value.IsUndefined)
             {
-                return NullJson;
+                return "null";
             }
             if (value.IsString)
             {
@@ -69,7 +67,7 @@ namespace NativeShell.Core
         {
             if (value.IsValueNull || value.IsUndefined)
             {
-                return NullJson;
+                return "null";
             }
             if (value.IsString)
             {
@@ -120,7 +118,7 @@ namespace NativeShell.Core
             if (t == typeof(Task))
             {
                 await task;
-                return NullJson;
+                return "null";
             }
 
             var type = t.GetGenericArguments()[0];
@@ -144,7 +142,7 @@ namespace NativeShell.Core
         {
             if (obj == null)
             {
-                return NullJson;
+                return "null";
             }
             var type = obj.GetType();
             switch (Type.GetTypeCode(type))
