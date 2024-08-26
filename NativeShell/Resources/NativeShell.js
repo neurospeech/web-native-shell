@@ -38,7 +38,7 @@
                     reject(error);
                     return;
                 }
-                resolve(result.value);
+                resolve(result);
             } catch (error) {
                 console.error(error);
             } finally {
