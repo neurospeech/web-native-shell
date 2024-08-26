@@ -8,7 +8,7 @@ namespace NativeShell
 {
     public static partial class MauiAppBuilderExtensions
     {
-        public static MauiAppBuilder RegiserPushServices(this MauiAppBuilder builder)
+        public static MauiAppBuilder RegisterPushServices(this MauiAppBuilder builder)
         {
             return builder;
         }
