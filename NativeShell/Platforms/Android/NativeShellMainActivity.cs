@@ -25,12 +25,12 @@ namespace NativeShell
             HandleIntent(intent);
         }
 
-        private static void HandleIntent(Intent intent)
+        protected virtual void HandleIntent(Intent intent)
         {
             FirebaseCloudMessagingImplementation.OnNewIntent(intent);
         }
 
-        private void CreateNotificationChannelIfNeeded()
+        protected virtual void CreateNotificationChannelIfNeeded()
         {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
             {
