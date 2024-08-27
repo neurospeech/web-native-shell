@@ -45,8 +45,6 @@
 		<PackageReference Include="YantraJS.ExpressionCompiler" Version="1.2.209" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 		<PackageReference Include="YantraJS.JSClassGenerator" Version="1.2.209" />
 		<PackageReference Include="Plugin.Firebase" Version="3.0.0" />
-		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7" Version="2.0.0.1" ExcludeAssets="build;buildTransitive" />
-		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.0.1" ExcludeAssets="build;buildTransitive" />
 	</ItemGroup>
 
 	<ItemGroup>
