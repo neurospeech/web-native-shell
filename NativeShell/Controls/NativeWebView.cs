@@ -20,11 +20,17 @@ namespace NativeShell.Controls
 
         public IJSContext Context { get;set; }
 
+        /// <summary>
+        /// Return false to deny execution of native script.
+        /// </summary>
+        public Func<string,bool> ShouldInvokeScript { get; set; }
+
         partial void OnPlatformInit();
 
         static  partial void OnStaticPlatformInit();
 
         public GlobalClr Clr { get; }
+        private string currentUrl;
 
         public NativeWebView()
         {
@@ -64,6 +70,8 @@ namespace NativeShell.Controls
             NativeShell.Instance.OnUrlRequested += Instance_OnUrlRequested;
             NativeShell.Instance.OnDeviceTokenUpdated+= Instance_OnDeviceTokenUpdated;
 
+            this.Navigating += (s, e) => this.currentUrl = e.Url;
+
         }
 
 
@@ -91,12 +99,19 @@ namespace NativeShell.Controls
         /// everything in CLR.
         /// </summary>
         /// <param name="script"></param>
-        /// <param name="callback"></param>
         public void RunMainThreadJavaScript(string script)
         {
             Dispatcher.DispatchTask( async () => {
                 try
                 {
+                    var s = this.ShouldInvokeScript;
+                    if (s != null) {
+                        var url = this.currentUrl;
+                        if(!s(url))
+                        {
+                            throw new UnauthorizedAccessException($"Cannot access nativeShell from {url}");
+                        }
+                    }
                     var result = await this.Clr.SerializeAsync(Context.Evaluate(script));
                 } catch (Exception ex) {
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
