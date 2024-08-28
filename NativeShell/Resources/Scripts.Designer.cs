@@ -63,24 +63,34 @@ namespace NativeShell.Resources {
         /// <summary>
         ///   Looks up a localized string similar to (function () {
         ///    let id = 1;
+        ///
         ///    const map = new Map();
         ///
         ///    function runCode($rid$, $code$, $args$) {
         ///        return function () {
         ///            try {
-        ///                let result = ($code$).apply({ clr, evalInPage }, ...$args$);
+        ///                let a = $args$;
+        ///                let result = ($code$).apply({ clr, evalInPage }, a);
         ///                if (result &amp;&amp; result.then) {
         ///                    result.then((r) =&gt; {
-        ///                        evalInPage(`window.nativeShell.on($rid$, ${JSON.stringify(r) || 1})`);
+        ///                        evalInPage(`window.nativeShell.on($rid$, ${serialize(r) || 1})`);
         ///                    }, (e) =&gt; {
-        ///                        evalInPage(`window.nativeShell.on( [rest of string was truncated]&quot;;.
+        ///                        evalInPage(` [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string NativeShell {
             get {
                 return ResourceManager.GetString("NativeShell", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to function __awaiter(thisArg, _arguments, P, generator) {
+        ///    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        ///    return new (P || (P = Promise))(function (resolve, reject) {
+        ///        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        ///        function rejected(value) { try { step(generator[&quot;throw&quot;](value)); } catch (e) { reject(e); } }
+        ///        function step(result) { result.done ? resolve(result.value) :  [rest of string was truncated]&quot;;.
+        /// </summary>
         internal static string TSLib {
             get {
                 return ResourceManager.GetString("TSLib", resourceCulture);

@@ -32,7 +32,7 @@ namespace NativeShell.Controls
             this.Clr = new GlobalClr();
 
             // Need to invoke TSLib in the global context...
-            Context.Evalute(Scripts.TSLib;
+            Context.Evaluate(Scripts.TSLib, "tslib.js");
 
             Context["clr"] = Context.Marshal(Clr);
 
