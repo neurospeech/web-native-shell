@@ -80,5 +80,11 @@ namespace NativeShell.Resources {
                 return ResourceManager.GetString("NativeShell", resourceCulture);
             }
         }
+
+        internal static string TSLib {
+            get {
+                return ResourceManager.GetString("TSLib", resourceCulture);
+            }
+        }
     }
 }

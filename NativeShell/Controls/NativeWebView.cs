@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NativeShell.Resources;
 
 namespace NativeShell.Controls
 {
@@ -29,6 +30,10 @@ namespace NativeShell.Controls
         {
             Context = JSContextFactory.Instance.Create();
             this.Clr = new GlobalClr();
+
+            // Need to invoke TSLib in the global context...
+            Context.Evalute(Scripts.TSLib;
+
             Context["clr"] = Context.Marshal(Clr);
 
             Context["serialize"] = Context.CreateFunction(1, (c, s) => {
