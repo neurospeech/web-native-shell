@@ -31,13 +31,13 @@ namespace NativeShell.Platforms.Android.Controls
         public override void OnPageStarted(global::Android.Webkit.WebView? view, string? url, Bitmap? favicon)
         {
             base.OnPageStarted(view, url, favicon);
+            this.nativeWebView.Eval(Scripts.NativeShell);
             KeyboardService.Instance.Refresh();
         }
 
         public override void OnPageFinished(global::Android.Webkit.WebView? view, string? url)
         {
             base.OnPageFinished(view, url);
-            this.nativeWebView.Eval(Scripts.NativeShell);
             this.nativeWebView.IsPageReady = true;
             KeyboardService.Instance.Refresh();
         }

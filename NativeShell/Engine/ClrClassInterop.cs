@@ -291,9 +291,15 @@ namespace NativeShell
             var p = new object[l];
             for (int i = 0; i < l; i++)
             {
+                var vi = args[i];
                 var pm = argTypes[i];
                 if (i < args.Count)
                 {
+                    if (vi.CanConvertTo(pm.ParameterType, out var cv))
+                    {
+                        p[i] = cv;
+                        continue;
+                    }
                     p[i] = c.Deserialize(args[i], pm.ParameterType);
                     continue;
                 }
