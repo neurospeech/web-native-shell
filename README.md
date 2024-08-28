@@ -114,8 +114,12 @@ Lets assume that we have configured push messaging and we want to retrieve the d
 
 Method and property names of CLR objects are converted to camel case.
 
+# Security
+
+NativeWebWivew has property called `ShouldInvokeScript`, you can set it to a function that accepts string and returns true/false.
+
 # License
 
-The project is licensed as GPLv3 as well as Commercial License. Commercial license is available for USD $1,000 per app per platform. This is lifetime license with unlimited free updates.
+The project is licensed as GPLv3 as well as Commercial License. Commercial license is available for USD $100 per app per platform. This is lifetime license with unlimited free updates.
 
 Please contact us at support at neurospeech dot com to get the license.
